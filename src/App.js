@@ -1,26 +1,36 @@
-import React from 'react';
 import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  state = { 
+    eror:'',
+    percent:0
+   }
 
+  
+   onPercentChange = (e)=>{
+    const percent=e.target.value;
+    if(percent>=0&percent<=100){
+    this.setState({
+      percent,  
+      eror:''
+      })
+     }
+     else{
+       this.setState({
+         eror:'Your number is not in range 0,100'
+       })
+     }
+   }
+  render() { 
+    return ( 
+      <React.Fragment>
+      <input  value={this.state.percent} type="number" onChange={this.onPercentChange}/>
+      <p>{this.state.eror}</p>
+      </React.Fragment>
+     );
+  }
+}
+ 
 export default App;
